@@ -25,21 +25,22 @@ class TodoList extends Component {
     }, () => console.log(this.state));
   }
 
-  deleteTodo(event){
-    event.preventDefault();
+  deleteTodo(item){
+
     const array = this.state.items;
-    const index = array.indexOf(event.target.value);
-    array.splice(index);
+    const index = array.indexOf(item);
+    array.splice(index, 1);
+
     this.setState({
       items: array
-    },() => console.log(array))
+    },() => console.log(index))
   }
 
   renderTodos(){
     return this.state.items.map((item) => {
       return(
         <div key={item}>
-          {item} | <button onClick={this.deleteTodo.bind(this)}>Delete</button>
+          {item} | <button onClick={this.deleteTodo.bind(this, item)}>Delete</button>
         </div>
       );
     });
